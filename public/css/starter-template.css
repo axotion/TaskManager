@@ -1,0 +1,41 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.carousel .item {
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+    overflow: hidden;
+}
+.carousel-control {
+    border-radius: 10px;
+}
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
+.social {
+    width: 310px;
+    float: none;
+    margin: 15px auto;
+}
+.fixit{
+    display: inline-block;
+}
