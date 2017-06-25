@@ -2,13 +2,8 @@
 
 namespace TaskManager\Http\Controllers;
 
-use function Couchbase\basicDecoderV1;
-use Gate;
-use TaskManager\ApiKeys;
-use TaskManager\Http\Requests\TaskRequest;
 use TaskManager\Repository\TasksRepository;
 use TaskManager\Tasks;
-use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
@@ -23,10 +18,9 @@ class TasksController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
             if (auth()->guest()) {
                 return view('home');
@@ -49,11 +43,10 @@ class TasksController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @internal param Request $request
      */
-    public function store(Request $request, TaskRequest $task)
+    public function store()
     {
 
         Tasks::create(\request(['task', 'complete','user_id']));
@@ -61,52 +54,31 @@ class TasksController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \TaskManager\Tasks  $tasks
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tasks $tasks)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \TaskManager\Tasks  $tasks
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tasks $tasks)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param Tasks $id
-     * @return \Illuminate\Http\Response
+     * @param Tasks $task
+     * @return bool
+     * @internal param Request $request
+     * @internal param Tasks $id
      * @internal param Tasks $tasks
      */
-    public function update(Request $request, Tasks $task)
+    public function update(Tasks $task)
     {
         $this->task->mark($task);
+        return true;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \TaskManager\Tasks  $tasks
-     * @return \Illuminate\Http\Response
+     * @param Tasks $id
+     * @return bool
+     * @internal param Tasks $tasks
      */
     public function destroy(Tasks $id)
     {
-
-
         $id->delete();
-
+        return true;
     }
 
 
