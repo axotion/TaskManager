@@ -65,7 +65,6 @@ class TasksController extends Controller
     public function update(Tasks $task)
     {
         $this->task->mark($task);
-        return true;
     }
 
     /**
@@ -78,7 +77,6 @@ class TasksController extends Controller
     public function destroy(Tasks $id)
     {
         $id->delete();
-        return true;
     }
 
 

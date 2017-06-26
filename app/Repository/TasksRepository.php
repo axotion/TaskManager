@@ -15,18 +15,31 @@ class TasksRepository
 {
     protected $task;
 
+    /**
+     * TasksRepository constructor.
+     * @param Tasks $task
+     */
     function __construct(Tasks $task)
     {
         $this->task = $task;
     }
+
+    /**
+     * @param int $pages
+     * @return mixed
+     */
     public function allTask($pages = 5){
-       return Tasks::where('user_id', auth()->id())->orderBy('id', 'desc')->Paginate($pages);
+       return $this->task->where('user_id', auth()->id())->orderBy('id', 'desc')->Paginate($pages);
     }
-    public function mark($task){
-        $task =  Tasks::where('id', $task->id)->first();
-        $task->complete=true;
-        $task->save();
-        return true;
+
+    /**
+     * @param Tasks $c_task
+     */
+    public function mark(Tasks $c_task){
+        $c_task =  $this->task->where('id', $c_task->id)->first();
+        $c_task->complete=true;
+        $c_task->save();
+
     }
 
 }

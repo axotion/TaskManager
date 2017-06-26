@@ -15,7 +15,7 @@
             </div>
 
             <div class="pull-right" style="margin-top: -0.6%">
-                <button id = "{{$task->id }}" class="btn btn-danger btn-primary btn-default" onclick="deleteTask(this.id)">Delete</button>
+                <button id = "{{$task->id}}" class="btn btn-danger btn-primary btn-default" onclick="deleteTask(this.id)">Delete</button>
 
             </div>
             <br>
