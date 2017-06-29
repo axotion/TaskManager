@@ -13,10 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
+
+
+
 Route::post('/tasks', function (Request $request) {
     if ($user = \TaskManager\ApiKeys::where('key', $request->input('key'))->first()) {
         return response()->json([
-            'Tasks' => \TaskManager\Tasks::where('user_id', $user->user_id)->select('tasks.id','tasks.task', 'tasks.complete')->get(),
+            'Tasks' => \TaskManager\Tasks::where('user_id', $user->user_id)->orderBy('created_at', 'desc')->select('tasks.id','tasks.complete','tasks.task')->get()->groupBy(function($data){
+                return Carbon\Carbon::parse($data->created_at)->format('d.m.Y');
+            })
         ]);
     } else {
         return response()->json([

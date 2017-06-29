@@ -2,16 +2,15 @@
 
 namespace TaskManager\Http\Controllers;
 
+use TaskManager\Http\Requests\TaskRequest;
 use TaskManager\Repository\TasksRepository;
 use TaskManager\Tasks;
 
 class TasksController extends Controller
 {
-    protected $api;
     protected $task;
-    function __construct(\TaskManager\Services\ApiService $api, TasksRepository $task)
+    function __construct( TasksRepository $task)
     {
-        $this->api = $api;
         $this->task = $task;
         $this->middleware('auth')->except('index');
     }
@@ -25,12 +24,10 @@ class TasksController extends Controller
             if (auth()->guest()) {
                 return view('home');
             } else {
-                $tasks = $this->task->allTask(9);
-                return view('tasks', compact('tasks'));
+                $archives = $this->task->allTask();
+               return view('tasks', compact( 'archives'));
             }
-
-        }
-
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,12 +40,12 @@ class TasksController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param TaskRequest $task
      * @return \Illuminate\Http\Response
      * @internal param Request $request
      */
-    public function store()
+    public function store(TaskRequest $task)
     {
-
         Tasks::create(\request(['task', 'complete','user_id']));
         return redirect()->home();
     }
@@ -57,7 +54,7 @@ class TasksController extends Controller
      * Update the specified resource in storage.
      *
      * @param Tasks $task
-     * @return bool
+     * @return void
      * @internal param Request $request
      * @internal param Tasks $id
      * @internal param Tasks $tasks
@@ -66,12 +63,11 @@ class TasksController extends Controller
     {
         $this->task->mark($task);
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param Tasks $id
-     * @return bool
+     * @return void
      * @internal param Tasks $tasks
      */
     public function destroy(Tasks $id)

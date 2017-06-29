@@ -2,10 +2,8 @@
 
 namespace TaskManager\Providers;
 
-use Dotenv\Validator;
-use Illuminate\Support\Facades\Session;
+
 use Illuminate\Support\ServiceProvider;
-use TaskManager\Policies\TasksPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,17 +18,13 @@ class AppServiceProvider extends ServiceProvider
     {
 
         \Validator::extend('match', function ($attribute, $value, $parameters, $validator) {
-          //  dd($value, session()->get('code'));
            if($value == session()->get('code')){
                return true;
            }
            return false;
         });
 
-
-\Schema::defaultStringLength(191);
-
-
+        \Schema::defaultStringLength(191);
 
     }
     /**

@@ -9,12 +9,12 @@
 namespace TaskManager\Repository;
 
 
+use Carbon\Carbon;
 use TaskManager\Tasks;
 
 class TasksRepository
 {
     protected $task;
-
     /**
      * TasksRepository constructor.
      * @param Tasks $task
@@ -23,15 +23,14 @@ class TasksRepository
     {
         $this->task = $task;
     }
-
     /**
-     * @param int $pages
      * @return mixed
      */
-    public function allTask($pages = 5){
-       return $this->task->where('user_id', auth()->id())->orderBy('id', 'desc')->Paginate($pages);
-    }
-
+    public function allTask(){
+        return $this->task->where('user_id', auth()->id())->orderBy('created_at', 'desc')->get()->groupBy(function($data){
+            return Carbon::parse($data->created_at)->format('d.m.Y');
+        });
+}
     /**
      * @param Tasks $c_task
      */
@@ -39,7 +38,5 @@ class TasksRepository
         $c_task =  $this->task->where('id', $c_task->id)->first();
         $c_task->complete=true;
         $c_task->save();
-
     }
-
 }
