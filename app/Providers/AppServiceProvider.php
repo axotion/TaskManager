@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
            return false;
         });
 
-        \Schema::defaultStringLength(191);
+        \Schema::defaultStringLength(300);
 
     }
     /**

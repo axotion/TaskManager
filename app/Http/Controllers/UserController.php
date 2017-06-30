@@ -2,17 +2,15 @@
 
 namespace TaskManager\Http\Controllers;
 
-use TaskManager\Repository\UserRepository;
 use TaskManager\Services\ApiService;
 
 class UserController extends Controller
 {
     protected $user;
     protected $api;
-    public function __construct(UserRepository $user, ApiService $api)
+    public function __construct(ApiService $api)
     {
         $this->middleware('auth');
-        $this->user = $user;
         $this->api = $api;
     }
     /**

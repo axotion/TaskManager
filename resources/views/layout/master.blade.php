@@ -41,14 +41,19 @@
             <a class="navbar-brand" href="/">{{ config('app.name')  }}</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 @if(auth()->guest())
                 <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
                 @else
                     <li><a href="/profile"><b>{{ auth()->user()->name}}</b></a></li>
-                    <li><a href="/create">New task</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li> <p class="navbar-btn" style="margin-right: 10px;">
+                    <a href="/create" class="btn btn-info btn-primary btn-default">Create task</a>
+                </p></li>
+				
+				<li> <p class="navbar-btn">
+                    <a href="/logout" class="btn btn-danger btn-primary btn-default">Logout</a>
+                </p></li>
 
 
                 @endif
@@ -58,7 +63,7 @@
     </div>
 </nav>
 
-<div class="container" style="padding-top: 0% !important;">
+<div class="container">
 
     <div class="starter-template">
         <h1>@yield('title')</h1>
