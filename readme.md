@@ -1,6 +1,11 @@
 # TaskManager
 Manage your tasks with laravel app!
 
+[![Build Status](https://scrutinizer-ci.com/g/axotion/TaskManager/badges/build.png?b=master)](https://scrutinizer-ci.com/g/axotion/TaskManager/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/axotion/TaskManager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/axotion/TaskManager/?branch=master)
+
+
+
 Installation
 ```
 git clone https://github.com/axotion/TaskManager.git
